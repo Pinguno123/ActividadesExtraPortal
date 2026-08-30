@@ -1,4 +1,5 @@
-﻿using System;
+using ActividadesExtraPortal.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,30 +10,18 @@ using System.Windows.Forms;
 
 namespace ActividadesExtraPortal
 {
-    public partial class Cursos : Form
+    public partial class Cursos : PlantillaAACD
     {
-        private Portal formPrincipal;
         public Cursos(Portal principal)
         {
             InitializeComponent();
+
+            this.lblNombreOpcion.Text = "Cursos";
+            this.lblBanner.Text = "Impulsa tu potencial y sé parte de los cursos especializados en la Universidad Don Bosco.";
+            this.lblBanner.ForeColor = Color.White;
+            this.pnBanner.BackColor = Color.FromArgb(13, 148, 136);
+
             this.formPrincipal = principal;
-        }
-
-        private void Cursos_Load(object sender, EventArgs e)
-        {
-
-        }
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-            this.formPrincipal.Show();
-            this.Close();
-        }
-        private void Forms_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing && !this.formPrincipal.Visible)
-            {
-                Application.Exit();
-            }
         }
     }
 }

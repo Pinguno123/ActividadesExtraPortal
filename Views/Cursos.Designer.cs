@@ -28,65 +28,97 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dgvCursos = new DataGridView();
+            panel1 = new Panel();
+            rbOfertados = new RadioButton();
+            rbInscritos = new RadioButton();
             label1 = new Label();
-            PanelHeader = new Panel();
-            panel2 = new Panel();
-            PanelHeader.SuspendLayout();
+            pnBanner.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvCursos).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
+            // 
+            // dgvCursos
+            // 
+            dgvCursos.BackgroundColor = SystemColors.Control;
+            dgvCursos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvCursos.Location = new Point(118, 211);
+            dgvCursos.Name = "dgvCursos";
+            dgvCursos.Size = new Size(948, 510);
+            dgvCursos.TabIndex = 14;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(0, 48, 135);
+            panel1.Controls.Add(rbOfertados);
+            panel1.Controls.Add(rbInscritos);
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(118, 155);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(948, 50);
+            panel1.TabIndex = 1;
+            // 
+            // rbOfertados
+            // 
+            rbOfertados.AutoSize = true;
+            rbOfertados.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbOfertados.ForeColor = Color.White;
+            rbOfertados.Location = new Point(103, 13);
+            rbOfertados.Name = "rbOfertados";
+            rbOfertados.Size = new Size(93, 24);
+            rbOfertados.TabIndex = 16;
+            rbOfertados.TabStop = true;
+            rbOfertados.Text = "Ofertados";
+            rbOfertados.UseVisualStyleBackColor = true;
+            // 
+            // rbInscritos
+            // 
+            rbInscritos.AutoSize = true;
+            rbInscritos.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbInscritos.ForeColor = Color.White;
+            rbInscritos.Location = new Point(16, 13);
+            rbInscritos.Name = "rbInscritos";
+            rbInscritos.Size = new Size(81, 24);
+            rbInscritos.TabIndex = 15;
+            rbInscritos.TabStop = true;
+            rbInscritos.Text = "Inscritos";
+            rbInscritos.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Cursor = Cursors.Hand;
-            label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 9);
+            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(10, 16);
             label1.Name = "label1";
-            label1.Size = new Size(122, 30);
+            label1.Size = new Size(0, 20);
             label1.TabIndex = 0;
-            label1.Text = "Estudiantes";
-            label1.Click += label1_Click_1;
-            // 
-            // PanelHeader
-            // 
-            PanelHeader.BackColor = Color.FromArgb(0, 48, 135);
-            PanelHeader.Controls.Add(panel2);
-            PanelHeader.Controls.Add(label1);
-            PanelHeader.Location = new Point(0, 0);
-            PanelHeader.Margin = new Padding(0);
-            PanelHeader.Name = "PanelHeader";
-            PanelHeader.Size = new Size(1185, 50);
-            PanelHeader.TabIndex = 4;
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(0, 53);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(302, 684);
-            panel2.TabIndex = 1;
             // 
             // Cursos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 761);
-            Controls.Add(PanelHeader);
-            MaximumSize = new Size(1200, 800);
-            MinimumSize = new Size(1200, 800);
+            Controls.Add(panel1);
+            Controls.Add(dgvCursos);
             Name = "Cursos";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Actividades Extra-Académicas - Cursos";
-            FormClosing += Forms_FormClosing;
-            Load += Cursos_Load;
-            PanelHeader.ResumeLayout(false);
-            PanelHeader.PerformLayout();
+            Controls.SetChildIndex(lblNombreOpcion, 0);
+            Controls.SetChildIndex(pnBanner, 0);
+            Controls.SetChildIndex(dgvCursos, 0);
+            Controls.SetChildIndex(panel1, 0);
+            pnBanner.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvCursos).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
+        private DataGridView dgvCursos;
+        private Panel panel1;
         private Label label1;
-        private Panel PanelHeader;
-        private Panel panel2;
+        private RadioButton rbInscritos;
+        private RadioButton rbOfertados;
     }
 }

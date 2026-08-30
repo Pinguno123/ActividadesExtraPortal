@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox1 = new PictureBox();
+            pcDeporte = new PictureBox();
             lblDeporteTitulo = new Label();
             lblRama = new Label();
             lblDeporte = new Label();
             btnInscribir = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcDeporte).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
+            // pcDeporte
             // 
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(300, 210);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            pcDeporte.Location = new Point(0, 0);
+            pcDeporte.Name = "pcDeporte";
+            pcDeporte.Size = new Size(300, 210);
+            pcDeporte.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcDeporte.TabIndex = 0;
+            pcDeporte.TabStop = false;
             // 
             // lblDeporteTitulo
             // 
@@ -99,16 +99,16 @@
             Controls.Add(lblDeporte);
             Controls.Add(lblRama);
             Controls.Add(lblDeporteTitulo);
-            Controls.Add(pictureBox1);
+            Controls.Add(pcDeporte);
             Name = "DeportesTarjeta";
             Size = new Size(300, 350);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcDeporte).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
+        private PictureBox pcDeporte;
         private Label lblDeporteTitulo;
         private Label lblRama;
         private Label lblDeporte;

@@ -45,9 +45,9 @@ namespace ActividadesExtraPortal
             PanelActividades = new Panel();
             panel4 = new Panel();
             label4 = new Label();
-            panel7 = new Panel();
-            panel6 = new Panel();
-            panel5 = new Panel();
+            pnDeportes = new Panel();
+            pnAsoc = new Panel();
+            pnArte = new Panel();
             panel3 = new Panel();
             panel12 = new Panel();
             label9 = new Label();
@@ -66,6 +66,7 @@ namespace ActividadesExtraPortal
             pictureBox3 = new PictureBox();
             panel1 = new Panel();
             label3 = new Label();
+            pnCursos = new Panel();
             PanelHeader.SuspendLayout();
             PanelEstudiante.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pBpfp).BeginInit();
@@ -248,10 +249,11 @@ namespace ActividadesExtraPortal
             // 
             // PanelActividades
             // 
+            PanelActividades.Controls.Add(pnCursos);
             PanelActividades.Controls.Add(panel4);
-            PanelActividades.Controls.Add(panel7);
-            PanelActividades.Controls.Add(panel6);
-            PanelActividades.Controls.Add(panel5);
+            PanelActividades.Controls.Add(pnDeportes);
+            PanelActividades.Controls.Add(pnAsoc);
+            PanelActividades.Controls.Add(pnArte);
             PanelActividades.Controls.Add(panel3);
             PanelActividades.Controls.Add(panel1);
             PanelActividades.Location = new Point(409, 56);
@@ -280,27 +282,27 @@ namespace ActividadesExtraPortal
             label4.Text = "Mis Actividades Extra-Académicas";
             label4.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel7
+            // pnDeportes
             // 
-            panel7.Location = new Point(50, 487);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(663, 100);
-            panel7.TabIndex = 5;
+            pnDeportes.Location = new Point(50, 487);
+            pnDeportes.Name = "pnDeportes";
+            pnDeportes.Size = new Size(663, 90);
+            pnDeportes.TabIndex = 5;
             // 
-            // panel6
+            // pnAsoc
             // 
-            panel6.BackColor = SystemColors.ControlLight;
-            panel6.Location = new Point(50, 381);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(663, 100);
-            panel6.TabIndex = 4;
+            pnAsoc.BackColor = SystemColors.ControlLight;
+            pnAsoc.Location = new Point(50, 381);
+            pnAsoc.Name = "pnAsoc";
+            pnAsoc.Size = new Size(663, 90);
+            pnAsoc.TabIndex = 4;
             // 
-            // panel5
+            // pnArte
             // 
-            panel5.Location = new Point(50, 275);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(663, 100);
-            panel5.TabIndex = 3;
+            pnArte.Location = new Point(50, 275);
+            pnArte.Name = "pnArte";
+            pnArte.Size = new Size(663, 90);
+            pnArte.TabIndex = 3;
             // 
             // panel3
             // 
@@ -515,6 +517,14 @@ namespace ActividadesExtraPortal
             label3.Text = "Actividades Extra-Académicas";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // pnCursos
+            // 
+            pnCursos.BackColor = SystemColors.ControlLight;
+            pnCursos.Location = new Point(50, 593);
+            pnCursos.Name = "pnCursos";
+            pnCursos.Size = new Size(663, 90);
+            pnCursos.TabIndex = 5;
+            // 
             // Portal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -571,9 +581,9 @@ namespace ActividadesExtraPortal
         private PictureBox pBpfp;
         private Panel panel1;
         private Label label3;
-        private Panel panel7;
-        private Panel panel6;
-        private Panel panel5;
+        private Panel pnDeportes;
+        private Panel pnAsoc;
+        private Panel pnArte;
         private Panel panel3;
         private Panel panel4;
         private Label label4;
@@ -593,5 +603,6 @@ namespace ActividadesExtraPortal
         private Label label9;
         private PictureBox pictureBox7;
         private Button btnAdmin;
+        private Panel pnCursos;
     }
 }

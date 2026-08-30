@@ -1,3 +1,4 @@
+using ActividadesExtraPortal.Views;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,19 +12,19 @@ namespace ActividadesExtraPortal
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            /*
-            Usuario usuarioFicticio = new Usuario(
-                            id: "00112233",
-                            nombre: "Usuario de Prueba",
-                            carrera: "Ingeniería en Desarrollo de Software",
-                            campus: "Campus Central",
-                            estado: "Activo",
-                            rutaArchivo: @"C:\Temp\datos_prueba.json" // Opcional: usa una ruta real si tu form lee este archivo al cargar
-                        );
-            Application.Run(new Portal(usuarioFicticio)); */
 
-            
+            /*
+                Usuario usuarioFicticio = new Usuario(
+                                id: "00112233",
+                                nombre: "Usuario de Prueba",
+                                carrera: "Ingeniería en Desarrollo de Software",
+                                campus: "Campus Central",
+                                estado: "Activo",
+                                rutaArchivo: @"C:\Temp\datos_prueba.json" // Opcional: usa una ruta real si tu form lee este archivo al cargar
+                            );
+                Application.Run(new Portal(usuarioFicticio)); */
+
+
             // Instanciar capturador
             PortalGrabber grabber = new PortalGrabber();
 
@@ -59,7 +60,7 @@ namespace ActividadesExtraPortal
                 );
 
                 Application.Exit();
-            } 
+            }
 
         }
     }

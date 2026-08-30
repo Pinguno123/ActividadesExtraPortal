@@ -12,14 +12,18 @@ using ActividadesExtraPortal.Services;
 
 namespace ActividadesExtraPortal
 {
-    public partial class Asociaciones : Form
+    public partial class Asociaciones : PlantillaAACD
     {
-        private Portal formPrincipal;
         private readonly AsociacionRepository asoRepo = new AsociacionRepository();
 
-        public Asociaciones(Portal principal)
+        public Asociaciones(Portal principal) 
         {
             InitializeComponent();
+
+            this.lblNombreOpcion.Text = "Asociaciones";
+            this.lblBanner.Text = "Anímate a participar y ser miembro de algunas de las asociaciones estudiantiles que existen en la Universidad Don Bosco";
+            this.pnBanner.BackColor = Color.FromArgb(232, 247, 255);
+
             this.formPrincipal = principal;
             this.Load += Asociaciones_Load;
         }
@@ -189,20 +193,6 @@ namespace ActividadesExtraPortal
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocurrió un error al procesar la acción: {ex.Message}", "Error de Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            this.formPrincipal.Show();
-            this.Close();
-        }
-
-        private void Forms_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing && !this.formPrincipal.Visible)
-            {
-                Application.Exit();
             }
         }
     }

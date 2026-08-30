@@ -28,11 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            PanelHeader = new Panel();
-            panel2 = new Panel();
-            panel1 = new Panel();
-            label4 = new Label();
             panel3 = new Panel();
             label10 = new Label();
             label11 = new Label();
@@ -49,7 +44,7 @@
             panel10 = new Panel();
             panel11 = new Panel();
             panel12 = new Panel();
-            button1 = new Button();
+            btnVerGruposExtension = new Button();
             label12 = new Label();
             panel19 = new Panel();
             label13 = new Label();
@@ -58,18 +53,16 @@
             panel18 = new Panel();
             label2 = new Label();
             panel13 = new Panel();
-            button2 = new Button();
+            btnVerProgramasFormacion = new Button();
             label14 = new Label();
             panel20 = new Panel();
             label16 = new Label();
             panel14 = new Panel();
-            button3 = new Button();
+            btnVoluntariadoCultural = new Button();
             panel21 = new Panel();
             label17 = new Label();
             label15 = new Label();
-            label3 = new Label();
-            PanelHeader.SuspendLayout();
-            panel1.SuspendLayout();
+            pnBanner.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel6.SuspendLayout();
@@ -85,57 +78,6 @@
             panel14.SuspendLayout();
             panel21.SuspendLayout();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Cursor = Cursors.Hand;
-            label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(122, 30);
-            label1.TabIndex = 0;
-            label1.Text = "Estudiantes";
-            label1.Click += label1_Click;
-            // 
-            // PanelHeader
-            // 
-            PanelHeader.BackColor = Color.FromArgb(0, 48, 135);
-            PanelHeader.Controls.Add(panel2);
-            PanelHeader.Controls.Add(label1);
-            PanelHeader.Location = new Point(0, 0);
-            PanelHeader.Margin = new Padding(0);
-            PanelHeader.Name = "PanelHeader";
-            PanelHeader.Size = new Size(1185, 50);
-            PanelHeader.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(0, 53);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(302, 684);
-            panel2.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.FromArgb(138, 53, 252);
-            panel1.Controls.Add(label4);
-            panel1.Location = new Point(130, 99);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(948, 50);
-            panel1.TabIndex = 2;
-            // 
-            // label4
-            // 
-            label4.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(16, 10);
-            label4.Name = "label4";
-            label4.Size = new Size(929, 30);
-            label4.TabIndex = 0;
-            label4.Text = "Inscríbete aquí y participa en las diversas actividades, cursos y programas que el Departamento de Arte y Cultura (DAC) tiene para ti.";
-            label4.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panel3
             // 
@@ -283,7 +225,7 @@
             // panel12
             // 
             panel12.BackColor = Color.FromArgb(255, 193, 7);
-            panel12.Controls.Add(button1);
+            panel12.Controls.Add(btnVerGruposExtension);
             panel12.Controls.Add(label12);
             panel12.Controls.Add(panel19);
             panel12.Location = new Point(130, 339);
@@ -291,14 +233,14 @@
             panel12.Size = new Size(625, 125);
             panel12.TabIndex = 6;
             // 
-            // button1
+            // btnVerGruposExtension
             // 
-            button1.Location = new Point(544, 13);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 8;
-            button1.Text = "Ver más";
-            button1.UseVisualStyleBackColor = true;
+            btnVerGruposExtension.Location = new Point(544, 13);
+            btnVerGruposExtension.Name = "btnVerGruposExtension";
+            btnVerGruposExtension.Size = new Size(75, 23);
+            btnVerGruposExtension.TabIndex = 8;
+            btnVerGruposExtension.Text = "Ver más";
+            btnVerGruposExtension.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -373,7 +315,7 @@
             // panel13
             // 
             panel13.BackColor = Color.FromArgb(13, 110, 253);
-            panel13.Controls.Add(button2);
+            panel13.Controls.Add(btnVerProgramasFormacion);
             panel13.Controls.Add(label14);
             panel13.Controls.Add(panel20);
             panel13.Location = new Point(130, 481);
@@ -381,14 +323,14 @@
             panel13.Size = new Size(625, 125);
             panel13.TabIndex = 7;
             // 
-            // button2
+            // btnVerProgramasFormacion
             // 
-            button2.Location = new Point(544, 13);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 10;
-            button2.Text = "Ver más";
-            button2.UseVisualStyleBackColor = true;
+            btnVerProgramasFormacion.Location = new Point(544, 13);
+            btnVerProgramasFormacion.Name = "btnVerProgramasFormacion";
+            btnVerProgramasFormacion.Size = new Size(75, 23);
+            btnVerProgramasFormacion.TabIndex = 10;
+            btnVerProgramasFormacion.Text = "Ver más";
+            btnVerProgramasFormacion.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
@@ -422,7 +364,7 @@
             // panel14
             // 
             panel14.BackColor = Color.FromArgb(13, 202, 240);
-            panel14.Controls.Add(button3);
+            panel14.Controls.Add(btnVoluntariadoCultural);
             panel14.Controls.Add(panel21);
             panel14.Controls.Add(label15);
             panel14.Location = new Point(130, 624);
@@ -430,14 +372,14 @@
             panel14.Size = new Size(625, 125);
             panel14.TabIndex = 8;
             // 
-            // button3
+            // btnVoluntariadoCultural
             // 
-            button3.Location = new Point(541, 13);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 12;
-            button3.Text = "Ver más";
-            button3.UseVisualStyleBackColor = true;
+            btnVoluntariadoCultural.Location = new Point(541, 13);
+            btnVoluntariadoCultural.Name = "btnVoluntariadoCultural";
+            btnVoluntariadoCultural.Size = new Size(75, 23);
+            btnVoluntariadoCultural.TabIndex = 12;
+            btnVoluntariadoCultural.Text = "Ver más";
+            btnVoluntariadoCultural.UseVisualStyleBackColor = true;
             // 
             // panel21
             // 
@@ -468,23 +410,11 @@
             label15.Text = "Voluntariado Cultural";
             label15.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label3
-            // 
-            label3.Font = new Font("Times New Roman", 24F, FontStyle.Bold);
-            label3.ForeColor = Color.FromArgb(19, 50, 136);
-            label3.Location = new Point(133, 53);
-            label3.Name = "label3";
-            label3.Size = new Size(943, 43);
-            label3.TabIndex = 9;
-            label3.Text = "Departamento de Arte y Cultura";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // Arte
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 761);
-            Controls.Add(label3);
             Controls.Add(panel14);
             Controls.Add(panel13);
             Controls.Add(panel15);
@@ -492,17 +422,18 @@
             Controls.Add(panel9);
             Controls.Add(panel6);
             Controls.Add(panel3);
-            Controls.Add(panel1);
-            Controls.Add(PanelHeader);
-            MaximumSize = new Size(1200, 800);
-            MinimumSize = new Size(1200, 800);
             Name = "Arte";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Actividades Extra-Académicas - Arte y cultura";
-            FormClosing += Form2_FormClosing;
-            PanelHeader.ResumeLayout(false);
-            PanelHeader.PerformLayout();
-            panel1.ResumeLayout(false);
+            Controls.SetChildIndex(panel3, 0);
+            Controls.SetChildIndex(panel6, 0);
+            Controls.SetChildIndex(panel9, 0);
+            Controls.SetChildIndex(panel12, 0);
+            Controls.SetChildIndex(panel15, 0);
+            Controls.SetChildIndex(panel13, 0);
+            Controls.SetChildIndex(panel14, 0);
+            Controls.SetChildIndex(lblNombreOpcion, 0);
+            Controls.SetChildIndex(pnBanner, 0);
+            pnBanner.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel6.ResumeLayout(false);
@@ -521,11 +452,6 @@
         }
 
         #endregion
-
-        private Label label1;
-        private Panel PanelHeader;
-        private Panel panel2;
-        private Panel panel1;
         private Panel panel3;
         private Panel panel4;
         private Panel panel5;
@@ -544,8 +470,6 @@
         private Panel panel20;
         private Panel panel14;
         private Panel panel21;
-        private Label label3;
-        private Label label4;
         private Label label5;
         private Label label7;
         private Label label6;
@@ -555,10 +479,10 @@
         private Label label9;
         private Label label12;
         private Label label13;
-        private Button button1;
-        private Button button2;
+        private Button btnVerGruposExtension;
+        private Button btnVerProgramasFormacion;
         private Label label14;
-        private Button button3;
+        private Button btnVoluntariadoCultural;
         private Label label15;
         private Label label16;
         private Label label17;

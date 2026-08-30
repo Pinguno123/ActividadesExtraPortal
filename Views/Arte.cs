@@ -1,3 +1,4 @@
+using ActividadesExtraPortal.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,26 +9,18 @@ using System.Windows.Forms;
 
 namespace ActividadesExtraPortal
 {
-    public partial class Arte : Form
+    public partial class Arte : PlantillaAACD
     {
-        private Portal? formPrincipal;
         public Arte(Portal? principal = null)
         {
             InitializeComponent();
-            this.formPrincipal = principal;
-        }
-        private void label1_Click(object sender, EventArgs e)
-        {
-            this.formPrincipal?.Show();
-            this.Close();
-        }
 
-        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing && !(this.formPrincipal?.Visible ?? false))
-            {
-                Application.Exit();
-            }
+            this.lblNombreOpcion.Text = "Departamento de Arte y Cultura";
+            this.lblBanner.Text = "Inscríbete aquí y participa en las diversas actividades, cursos y programas que el Departamento de Arte y Cultura (DAC) tiene para ti.";
+            this.lblBanner.ForeColor = Color.White;
+            this.pnBanner.BackColor = Color.FromArgb(138, 53, 252);
+
+            this.formPrincipal = principal!;
         }
 
         private void label13_Click(object sender, EventArgs e)
