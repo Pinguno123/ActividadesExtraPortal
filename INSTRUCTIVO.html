@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Instructivo de Ejecución</title>
+    <style>
+        /* Estilo de fondo que simula el entorno de MS Word */
+        body {
+            background-color: #f2f2f2;
+            color: #000000;
+            font-family: "Calibri", "Arial", sans-serif;
+            font-size: 11pt;
+            line-height: 1.15;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Contenedor que simula una página A4/Carta de Word */
+        .word-document {
+            background-color: #ffffff;
+            width: 816px; /* Ancho estándar de página en Word */
+            min-height: 1056px; /* Alto estándar */
+            box-sizing: border-box;
+            padding: 96px; /* Margen estándar de 1 pulgada (96px / 2.54cm) */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            border: 1px solid #d3d3d3;
+        }
+
+        /* Formato de Títulos (Estilos predeterminados de Word) */
+        h1 {
+            color: #1f4e78; /* Azul clásico de Word (Título 1) */
+            font-family: "Calibri Light", "Calibri", sans-serif;
+            font-size: 18pt;
+            font-weight: bold;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+            border-bottom: 1px solid #1f4e78;
+            padding-bottom: 4px;
+        }
+
+        h2 {
+            color: #2e74b5; /* Azul clásico de Word (Título 2) */
+            font-family: "Calibri Light", "Calibri", sans-serif;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 12pt;
+            margin-bottom: 4pt;
+        }
+
+        h3 {
+            color: #1f4e78; /* Azul clásico de Word (Título 3) */
+            font-family: "Calibri Light", "Calibri", sans-serif;
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 8pt;
+            margin-bottom: 2pt;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 10pt; /* Espaciado entre párrafos predeterminado */
+            text-align: justify;
+        }
+
+        /* Listas numeradas y con viñetas estilo Word */
+        ol, ul {
+            margin-top: 0;
+            margin-bottom: 10pt;
+            padding-left: 24pt;
+        }
+
+        li {
+            margin-bottom: 4pt;
+            text-align: left;
+        }
+
+        /* Enlaces estilo hipervínculo clásico */
+        a {
+            color: #0563c1;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: #551a8b;
+        }
+
+        /* Tabla clásica con estilos predeterminados de Word */
+        table.word-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12pt;
+            margin-bottom: 12pt;
+        }
+
+        table.word-table th {
+            background-color: #4f81bd; /* Azul clásico de encabezado de tabla */
+            color: #ffffff;
+            font-weight: bold;
+            border: 1px solid #385d8a;
+            padding: 6px 10px;
+            text-align: left;
+        }
+
+        table.word-table td {
+            border: 1px solid #95b3d7;
+            padding: 6px 10px;
+        }
+
+        /* Filas alternas con sombreado claro */
+        table.word-table tr:nth-child(even) {
+            background-color: #dbe5f1;
+        }
+
+        /* Formato para bloques de código (estilo tabla de un solo elemento) */
+        .code-block {
+            background-color: #f2f2f2;
+            border: 1px solid #d3d3d3;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 9.5pt;
+            padding: 8px 12px;
+            margin-top: 8pt;
+            margin-bottom: 10pt;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .inline-code {
+            font-family: "Consolas", "Courier New", monospace;
+            background-color: #f2f2f2;
+            padding: 1px 4px;
+            border: 1px solid #d3d3d3;
+            font-size: 10pt;
+        }
+
+        /* Cuadro de texto estilo Word para notas o advertencias */
+        .textbox-callout {
+            border: 1px solid #7f7f7f;
+            background-color: #fafafa;
+            padding: 10px 15px;
+            margin-top: 10pt;
+            margin-bottom: 10pt;
+        }
+
+        .textbox-callout-title {
+            font-weight: bold;
+            color: #c00000; /* Rojo oscuro para llamar la atención */
+            margin-bottom: 4pt;
+        }
+
+        /* Configuración de impresión */
+        @media print {
+            body {
+                background-color: #ffffff;
+                padding: 0;
+            }
+            .word-document {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                width: 100%;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="word-document">
+        <!-- Título Principal de Sección -->
+        <h1>5. INSTRUCTIVO DE EJECUCIÓN</h1>
+        <p>
+            El presente apartado describe de forma detallada los requerimientos técnicos y los procedimientos metodológicos para realizar el despliegue del sistema <strong>ActividadesExtraPortal</strong>, su compilación dentro del entorno de desarrollo de Microsoft Visual Studio 2022 y la posterior inicialización de sus servicios.
+        </p>
+
+        <!-- 5.1 Requisitos de Hardware y Software -->
+        <h2>5.1 Requisitos del Entorno de Trabajo</h2>
+        <p>
+            Previo a realizar la apertura de la solución, el desarrollador o auditor del proyecto debe validar que el equipo de computación cuente con los componentes de infraestructura y software indicados a continuación:
+        </p>
+
+        <table class="word-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Componente</th>
+                    <th>Especificación y Versión Requerida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Sistema Operativo</strong></td>
+                    <td>Microsoft Windows 10 o Windows 11 de 64 bits.</td>
+                </tr>
+                <tr>
+                    <td><strong>Entorno de Desarrollo (IDE)</strong></td>
+                    <td>Microsoft Visual Studio 2022 (v17.10 o superior) con soporte para escritorio .NET.</td>
+                </tr>
+                <tr>
+                    <td><strong>SDK de .NET</strong></td>
+                    <td>SDK de .NET 10.0 (Windows Desktop Runtime correspondiente).</td>
+                </tr>
+                <tr>
+                    <td><strong>Servidor de Base de Datos</strong></td>
+                    <td>Microsoft SQL Server 2019 o superior (LocalDB, Express o superior).</td>
+                </tr>
+                <tr>
+                    <td><strong>Navegador Web</strong></td>
+                    <td>Google Chrome (actualizado para su uso mediante WebDriver).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 5.2 Configuración del Servidor de Base de Datos -->
+        <h2>5.2 Configuración de la Base de Datos Relacional</h2>
+        <p>
+            El almacenamiento persistente del sistema se gestiona bajo el esquema de base de datos relacional <code>GestionExtracurricular</code> en Microsoft SQL Server. Para inicializar la base de datos local, realice el siguiente procedimiento:
+        </p>
+        <ol>
+            <li>Inicie la consola de administración de base de datos <strong>SQL Server Management Studio (SSMS)</strong> o <strong>Azure Data Studio</strong>.</li>
+            <li>Establezca conexión con su motor de base de datos local (por ejemplo: <span class="inline-code">localhost</span>, <span class="inline-code">.</span> o <span class="inline-code">(localdb)\MSSQLLocalDB</span>).</li>
+            <li>Abra el archivo de script SQL de creación de objetos y relaciones ubicado en la ruta del repositorio: <a href="file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Resources/proyecto.sql">Resources/proyecto.sql</a>.</li>
+            <li>Ejecute el script completo presionando la tecla <kbd>F5</kbd> o haciendo clic en el botón "Ejecutar". Esto creará la base de datos y todas las tablas del esquema.</li>
+        </ol>
+
+        <div class="textbox-callout">
+            <div class="textbox-callout-title">Nota sobre la cadena de conexión:</div>
+            <p>
+                La conexión a la base de datos se define en la propiedad de clase del archivo <a href="file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/DatabaseConnection.cs">DatabaseConnection.cs</a> (línea 9). En caso de usar una instancia de SQL Server que no sea localhost, modifique el servidor en la cadena de conexión:
+            </p>
+            <div class="code-block">private readonly string connectionString = @"Server=TU_SERVIDOR;Database=GestionExtracurricular;Trusted_Connection=True;TrustServerCertificate=True;";</div>
+        </div>
+
+        <!-- 5.3 Apertura del Proyecto en Visual Studio -->
+        <h2>5.3 Apertura del Proyecto en Visual Studio</h2>
+        <p>
+            El proyecto incorpora la especificación XML moderna de soluciones de Visual Studio (.slnx), la cual reduce la sobrecarga de metadatos de los antiguos archivos .sln convencionales.
+        </p>
+        <ol>
+            <li>Abra <strong>Microsoft Visual Studio 2022</strong>.</li>
+            <li>Seleccione la opción <strong>"Abrir un proyecto o una solución"</strong>.</li>
+            <li>Navegue a la carpeta del repositorio y elija el archivo de solución de nueva generación <a href="file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/ActividadesExtraPortal.slnx">ActividadesExtraPortal.slnx</a>, o en su defecto, el archivo del proyecto <a href="file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/ActividadesExtraPortal.csproj">ActividadesExtraPortal.csproj</a>.</li>
+            <li>Presione "Abrir". Visual Studio cargará el árbol de archivos en el Explorador de Soluciones.</li>
+        </ol>
+
+        <!-- 5.4 Restauración de Dependencias NuGet y Compilación -->
+        <h2>5.4 Restauración de Paquetes NuGet y Compilación</h2>
+        <p>
+            El aplicativo requiere un conjunto de dependencias externas alojadas en el gestor público NuGet. Por defecto, Visual Studio resolverá las dependencias al iniciar el proceso de compilación.
+        </p>
+        <h3>Librerías incorporadas:</h3>
+        <ul>
+            <li><strong>MaterialSkin.2 (v2.3.1)</strong>: Kit de diseño gráfico para formularios bajo las especificaciones de diseño de Material.</li>
+            <li><strong>Selenium.WebDriver (v4.45.0)</strong>: Módulo de control del navegador para la automatización web.</li>
+            <li><strong>Microsoft.Data.SqlClient (v7.0.2)</strong>: Conector para la consulta de datos en SQL Server.</li>
+        </ul>
+        <h3>Compilación de la Solución:</h3>
+        <ol>
+            <li>Si desea restaurar los paquetes manualmente, haga clic derecho sobre el nodo de la solución en el Explorador de Soluciones y seleccione <strong>"Restaurar paquetes NuGet"</strong>.</li>
+            <li>Proceda a compilar la solución desde el menú superior <strong>Compilar &gt; Compilar solución</strong> o mediante la combinación de teclas rápidas <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>.</li>
+            <li>La ventana de "Salida" confirmará la generación satisfactoria del binario ejecutable <span class="inline-code">ActividadesExtraPortal.exe</span> en la ruta local del proyecto.</li>
+        </ol>
+
+        <!-- 5.5 Proceso de Ejecución y Pruebas -->
+        <h2>5.5 Proceso de Ejecución y Flujo de Operación</h2>
+        <p>
+            Para realizar la puesta en marcha de la aplicación y comprobar su lógica de negocio de extremo a extremo, ejecute los siguientes pasos:
+        </p>
+        <ol>
+            <li>En Visual Studio, presione la tecla <kbd>F5</kbd> o haga clic en el botón de reproducción verde <strong>Iniciar</strong> para comenzar la depuración.</li>
+            <li><strong>Módulo de Scraping Activo (Selenium):</strong> La aplicación abrirá automáticamente una instancia de control de Google Chrome apuntando al Portal Web estudiantil institucional (<a href="https://admacad.udb.edu.sv/PortalWeb/">https://admacad.udb.edu.sv/PortalWeb/</a>).</li>
+            <li><strong>Autenticación del Estudiante:</strong> Ingrese el Carnet y contraseña válidos en los campos del formulario dentro del navegador web automatizado.</li>
+            <li><strong>Extracción de Perfil:</strong> Al iniciar sesión de manera exitosa, el código inyectará JavaScript para leer los datos académicos del DOM y descargar la fotografía de perfil. Posteriormente, la ventana de Google Chrome automatizada se cerrará automáticamente.</li>
+            <li><strong>Dashboard de Escritorio:</strong> La aplicación registrará o actualizará los datos recuperados en SQL Server y presentará el panel final de administración del estudiante en base a MaterialSkin, permitiendo interactuar con los submódulos de Cursos, Asociaciones y Actividades Deportivas o Artísticas.</li>
+        </ol>
+    </div>
+
+</body>
+</html>
