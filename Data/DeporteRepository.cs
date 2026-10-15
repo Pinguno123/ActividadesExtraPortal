@@ -5,9 +5,9 @@ using Microsoft.Data.SqlClient;
 
 namespace ActividadesExtraPortal.Data
 {
-    public class DeporteRepository
+    public class DeporteRepository : BaseRepository, IDeporteRepository
     {
-        private readonly DatabaseConnection db = new DatabaseConnection();
+        public List<SeleccionDeportiva> ObtenerTodos() => ObtenerTodasLasSelecciones();
 
         /// <summary>
         /// Obtiene todas las selecciones deportivas desde la tabla SeleccionesDeportivas.
@@ -125,6 +125,11 @@ namespace ActividadesExtraPortal.Data
             {
                 return $"Error de sistema: {ex.Message}";
             }
+        }
+
+        public string InscribirOActualizarParticipacion(string carnet, int idSeleccion, string? modalidad, string nuevoEstado)
+        {
+            return InscribirParticipacionDeportiva(carnet, idSeleccion, modalidad ?? "Entrenamiento");
         }
 
         /// <summary>

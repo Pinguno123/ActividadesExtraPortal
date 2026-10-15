@@ -2,30 +2,45 @@ using System;
 
 namespace ActividadesExtraPortal
 {
-    public class ParticipacionDeportiva
+    public class ParticipacionDeportiva : InscripcionBase
     {
-        public int IdParticipacion { get; set; }
-        public string Carnet { get; set; } = string.Empty;
+        public int IdParticipacion
+        {
+            get => IdInscripcionGeneral;
+            set => IdInscripcionGeneral = value;
+        }
+
         public int IdSeleccion { get; set; }
         public string? Modalidad { get; set; }
-        public DateTime FechaIngreso { get; set; }
+
+        public DateTime FechaIngreso
+        {
+            get => FechaRegistro;
+            set => FechaRegistro = value;
+        }
 
         // Propiedades auxiliares
-        public string? NombreEstudiante { get; set; }
-        public string? CarreraEstudiante { get; set; }
         public string? Disciplina { get; set; }
         public string? Rama { get; set; }
         public string? NombreEquipo { get; set; }
 
-        public ParticipacionDeportiva() { }
-
-        public ParticipacionDeportiva(int idParticipacion, string carnet, int idSeleccion, string? modalidad, DateTime fechaIngreso)
+        public ParticipacionDeportiva()
         {
-            IdParticipacion = idParticipacion;
-            Carnet = carnet;
+            EstadoGeneral = "Participando";
+        }
+
+        public ParticipacionDeportiva(int idParticipacion, string carnet, int idSeleccion, string? modalidad, DateTime fechaIngreso, string estado = "Participando")
+            : base(idParticipacion, carnet, fechaIngreso, estado)
+        {
             IdSeleccion = idSeleccion;
             Modalidad = modalidad;
-            FechaIngreso = fechaIngreso;
+        }
+
+        public override string ObtenerTitulo() => NombreEquipo ?? Disciplina ?? "Selección Deportiva";
+
+        public override string ObtenerDetalle()
+        {
+            return $"Disciplina: {Disciplina ?? "N/A"} | Rama: {Rama ?? "N/A"} | Mod: {Modalidad ?? "General"}";
         }
     }
 }

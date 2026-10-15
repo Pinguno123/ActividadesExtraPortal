@@ -5,9 +5,9 @@ using Microsoft.Data.SqlClient;
 
 namespace ActividadesExtraPortal.Data
 {
-    public class ArteRepository
+    public class ArteRepository : BaseRepository, IArteRepository
     {
-        private readonly DatabaseConnection db = new DatabaseConnection();
+        public List<ActividadDAC> ObtenerTodos() => ObtenerTodasLasActividades();
 
         /// <summary>
         /// Obtiene todas las actividades artísticas disponibles (DAC) con sus categorías e instructores.
@@ -135,6 +135,10 @@ namespace ActividadesExtraPortal.Data
                 return $"Error de sistema: {ex.Message}";
             }
         }
+
+        public List<InscripcionDAC> ObtenerInscripcionesEstudiante(string carnet) => ObtenerInscripcionesDACEstudiante(carnet);
+
+        public string InscribirEstudianteDAC(string carnet, int idActividad) => InscribirActividadDAC(carnet, idActividad);
 
         /// <summary>
         /// Cancela la inscripción a una actividad artística (DAC) llamando al procedimiento sp_CancelarInscripcionDAC.

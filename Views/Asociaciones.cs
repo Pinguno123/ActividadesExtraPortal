@@ -14,23 +14,33 @@ namespace ActividadesExtraPortal
 {
     public partial class Asociaciones : PlantillaAACD
     {
-        private readonly AsociacionRepository asoRepo = new AsociacionRepository();
+        private readonly IAsociacionRepository asoRepo;
 
-        public Asociaciones(Portal principal) 
+        public Asociaciones(Portal principal, IAsociacionRepository? repo = null) 
         {
             InitializeComponent();
+            this.formPrincipal = principal;
+            this.asoRepo = repo ?? new AsociacionRepository();
 
+            ConfigurarModulo();
+            this.Load += Asociaciones_Load;
+        }
+
+        protected override void ConfigurarModulo()
+        {
             this.lblNombreOpcion.Text = "Asociaciones";
             this.lblBanner.Text = "Anímate a participar y ser miembro de algunas de las asociaciones estudiantiles que existen en la Universidad Don Bosco";
             this.pnBanner.BackColor = Color.FromArgb(232, 247, 255);
+        }
 
-            this.formPrincipal = principal;
-            this.Load += Asociaciones_Load;
+        protected override void CargarDatos()
+        {
+            CargarAsociaciones();
         }
 
         private void Asociaciones_Load(object? sender, EventArgs e)
         {
-            CargarAsociaciones();
+            CargarDatos();
         }
 
         private void CargarAsociaciones()
@@ -149,7 +159,8 @@ namespace ActividadesExtraPortal
                                 {
                                     string correo = formPrincipal.UsuarioActual?.CorreoElectronico ?? $"{carnet}@udb.edu.sv";
                                     var interactor = new InteractWithForm();
-                                    await interactor.ProcesoAdmision(aso.Formulario, correo, carnet, aso.IdAsociacion);
+                                    var resAdm = await interactor.ProcesoAdmision(aso.Formulario, correo, carnet, aso.IdAsociacion);
+                                    MessageBox.Show(resAdm.Mensaje, "Resultado de Admisión", MessageBoxButtons.OK, resAdm.Exitoso ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
                                 }
                             }
                             CargarAsociaciones();
@@ -183,7 +194,8 @@ namespace ActividadesExtraPortal
                             {
                                 string correo = formPrincipal.UsuarioActual?.CorreoElectronico ?? $"{carnet}@udb.edu.sv";
                                 var interactor = new InteractWithForm();
-                                await interactor.ProcesoAdmision(aso.Formulario, correo, carnet, aso.IdAsociacion);
+                                var resAdm = await interactor.ProcesoAdmision(aso.Formulario, correo, carnet, aso.IdAsociacion);
+                                MessageBox.Show(resAdm.Mensaje, "Resultado de Admisión", MessageBoxButtons.OK, resAdm.Exitoso ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
                             }
                         }
                         CargarAsociaciones();

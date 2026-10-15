@@ -14,12 +14,13 @@ namespace ActividadesExtraPortal.Services
     {
         private IWebDriver? _driver;
 
-        public async Task ProcesoAdmision(string urlFormulario, string correo, string carnet, int idAsociacion)
+        public async Task<ResultadoAdmision> ProcesoAdmision(string urlFormulario, string correo, string carnet, int idAsociacion)
         {
             // Cerrar navegador anterior
             CerrarNavegadorActivo();
 
             double? notaFinal = null;
+            var resultado = new ResultadoAdmision();
 
             try
             {
@@ -33,7 +34,11 @@ namespace ActividadesExtraPortal.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error general en el flujo de Selenium: {ex.Message}", "Error de Automatización");
+                Console.WriteLine($"Error general en el flujo de Selenium: {ex.Message}");
+                resultado.Exitoso = false;
+                resultado.Mensaje = $"Error general en el flujo de automatización: {ex.Message}";
+                resultado.EstadoFinal = "Rechazada";
+                return resultado;
             }
             finally
             {
@@ -50,21 +55,25 @@ namespace ActividadesExtraPortal.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al actualizar el estado de membresía en la base de datos: {ex.Message}", "Error de Base de Datos");
+                Console.WriteLine($"Error al actualizar el estado de membresía en BD: {ex.Message}");
             }
+
+            resultado.NotaFinal = notaFinal;
+            resultado.EstadoFinal = nuevoEstado;
+            resultado.Exitoso = paso;
 
             if (notaFinal.HasValue)
             {
-                string mensaje = paso
-                    ? $"¡Pasaste la prueba de ingreso! Nota: {notaFinal.Value}. Tu afiliación ha sido aprobada."
-                    : $"No pasaste la prueba de ingreso. Nota: {notaFinal.Value}. Tu afiliación ha sido rechazada.";
-
-                MessageBox.Show(mensaje, "Resultado");
+                resultado.Mensaje = paso
+                    ? $"¡Pasaste la prueba de ingreso! Nota: {notaFinal.Value:F1}. Tu afiliación ha sido aprobada."
+                    : $"No alcanzaste la nota mínima en la prueba de ingreso. Nota: {notaFinal.Value:F1}. Tu afiliación ha sido rechazada.";
             }
             else
             {
-                MessageBox.Show("No se pudo determinar el resultado del examen. La afiliación se mantendrá como rechazada.", "Resultado No Obtenido");
+                resultado.Mensaje = "No se pudo determinar el resultado del examen. La afiliación se mantendrá en estado pendiente o rechazada.";
             }
+
+            return resultado;
         }
 
         private IWebDriver ConfigurarNavegador()

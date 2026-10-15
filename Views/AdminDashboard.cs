@@ -14,19 +14,29 @@ namespace ActividadesExtraPortal
     {
         private readonly Portal formPrincipal;
 
-        // Repositorios
-        private readonly CursoRepository cursoRepo = new CursoRepository();
-        private readonly AsociacionRepository asoRepo = new AsociacionRepository();
-        private readonly DeporteRepository deporteRepo = new DeporteRepository();
-        private readonly ArteRepository arteRepo = new ArteRepository();
+        // Repositorios e interfaces (Inversión de Dependencias - DIP)
+        private readonly ICursoRepository cursoRepo;
+        private readonly IAsociacionRepository asoRepo;
+        private readonly IDeporteRepository deporteRepo;
+        private readonly IArteRepository arteRepo;
 
-        // Servicio de imagenes
-        private readonly ImgBBService imgService = new ImgBBService();
+        // Servicio de imágenes desacoplado mediante interfaz
+        private readonly IImageService imgService;
 
-        public AdminDashboard(Portal principal)
+        public AdminDashboard(Portal principal,
+            ICursoRepository? cursoR = null,
+            IAsociacionRepository? asoR = null,
+            IDeporteRepository? depR = null,
+            IArteRepository? artR = null,
+            IImageService? imgS = null)
         {
             InitializeComponent();
             this.formPrincipal = principal;
+            this.cursoRepo = cursoR ?? new CursoRepository();
+            this.asoRepo = asoR ?? new AsociacionRepository();
+            this.deporteRepo = depR ?? new DeporteRepository();
+            this.arteRepo = artR ?? new ArteRepository();
+            this.imgService = imgS ?? new ImgBBService();
         }
 
         private void AdminDashboard_Load(object sender, EventArgs e)

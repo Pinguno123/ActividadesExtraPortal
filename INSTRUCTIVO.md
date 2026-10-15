@@ -99,3 +99,54 @@ Para ejecutar la aplicación en modo de depuración o de forma directa:
 
 > [!NOTE]
 > Si la base de datos local no está disponible o la conexión falla, la aplicación registrará un error en la consola de advertencia, pero te permitirá navegar a través de la interfaz del portal de manera demostrativa.
+
+---
+
+## 🏛️ 6. Arquitectura, Patrones de Diseño y Principios SOLID
+
+El proyecto implementa una arquitectura por capas desacoplada (`Models`, `Data`, `Services`, `Views`), diseñada bajo los estándares de **Programación Orientada a Objetos Avanzada** y los **Principios SOLID**.
+
+### 📐 Patrones de Diseño Implementados y su Justificación
+
+1. **Patrón Repository (Repositorio con Interfaces):**
+   - **Clases e Interfaces:** [`IRepository<T>`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/IRepository.cs), [`ICursoRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/ICursoRepository.cs), [`IDeporteRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/IDeporteRepository.cs), [`IAsociacionRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/IAsociacionRepository.cs), [`IArteRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/IArteRepository.cs), [`IUsuarioRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/IUsuarioRepository.cs), [`BaseRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/BaseRepository.cs).
+   - **Justificación Técnica:** Desacopla por completo la capa de presentación (formularios WinForms) de la tecnología de persistencia (SQL Server / ADO.NET). Permite modificar las consultas SQL, cambiar el motor de base de datos o realizar pruebas unitarias con repositorios simulados (*mocks*) sin necesidad de alterar una sola línea de código en la interfaz gráfica.
+
+2. **Patrón Singleton (Instancia Única Concurrente):**
+   - **Clase:** [`DatabaseConnection`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/DatabaseConnection.cs) (accedida mediante `DatabaseConnection.Instance`).
+   - **Justificación Técnica:** La cadena de conexión y la configuración del acceso al servidor de base de datos deben ser centralizadas y únicas en toda la aplicación. Implementar Singleton con `Lazy<DatabaseConnection>` y constructor privado evita la creación redundante de objetos de configuración en memoria, garantiza seguridad multihilo (*thread-safety*) y previene fugas de recursos.
+
+3. **Patrón Factory (Factoría Creacional de Componentes):**
+   - **Clase:** [`TarjetaFactory`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/TarjetaFactory.cs).
+   - **Justificación Técnica:** Centraliza la creación y mapeo de controles visuales de tarjeta (`ActividadInscritaTarjeta`). Al recibir cualquier objeto polimórfico derivado de `InscripcionBase`, la factoría construye y configura la tarjeta de manera uniforme, eliminando la duplicación de código en el formulario principal [`Portal`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/Portal.cs).
+
+---
+
+### 🧩 Cumplimiento de Principios SOLID
+
+| Principio | Evidencia en el Código Fuente |
+| :--- | :--- |
+| **S - Single Responsibility (Responsabilidad Única)** | Cada capa tiene una función delimitada: `Models` almacena entidades de dominio; `Data` encapsula sentencias SQL y stored procedures; `Services` gestiona servicios técnicos externos (Selenium y HTTP a ImgBB) retornando objetos DTO como [`ResultadoAdmision`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Services/ResultadoAdmision.cs) sin invocar elementos de UI; `Views` se encarga exclusivamente de la renderización visual. |
+| **O - Open/Closed (Abierto/Cerrado)** | Mediante las clases base abstractas [`ActividadExtracurricularBase`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/ActividadExtracurricularBase.cs) e [`InscripcionBase`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/InscripcionBase.cs), es posible extender el sistema añadiendo nuevos tipos de actividades (ej. *Voluntariado*, *Tutorías*) implementando métodos abstractos/virtuales sin necesidad de modificar el código existente de las tarjetas visuales ni de la factoría. |
+| **L - Liskov Substitution (Sustitución de Liskov)** | Las clases hijas [`InscripcionCurso`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/InscripcionCurso.cs), [`InscripcionDAC`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/InscripcionDAC.cs), [`MembresiaAsociacion`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/MembresiaAsociacion.cs) y [`ParticipacionDeportiva`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/ParticipacionDeportiva.cs) pueden sustituir a su clase base [`InscripcionBase`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/InscripcionBase.cs) en cualquier parte del sistema (como en [`TarjetaFactory.CrearTarjeta`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/TarjetaFactory.cs#L17)) manteniendo un comportamiento consistente y polimórfico. |
+| **I - Interface Segregation (Segregación de Interfaces)** | En lugar de una interfaz general con decenas de métodos no requeridos por todos los clientes, se crearon interfaces específicas por dominio: [`ICursoRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/ICursoRepository.cs), [`IDeporteRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/IDeporteRepository.cs), [`IAsociacionRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/IAsociacionRepository.cs), [`IArteRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/Interfaces/IArteRepository.cs), [`IImageService`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Services/Interfaces/IImageService.cs), etc. |
+| **D - Dependency Inversion (Inversión de Dependencias)** | Los módulos de alto nivel (vistas como [`AdminDashboard`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/AdminDashboard.cs), [`Deportes`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/Deportes.cs), [`Asociaciones`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/Asociaciones.cs)) dependen de abstracciones (interfaces) recibidas mediante sus constructores y no de implementaciones concretas fijas. |
+
+---
+
+### 🧬 Programación Orientada a Objetos Avanzada (POO)
+
+1. **Jerarquías de Clases y Abstracción:**
+   - Dominio unificado mediante [`ActividadExtracurricularBase`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/ActividadExtracurricularBase.cs) y [`InscripcionBase`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Models/InscripcionBase.cs).
+   - Acceso a datos unificado mediante [`BaseRepository`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/BaseRepository.cs).
+   - Capa de presentación unificada mediante la plantilla visual [`PlantillaAACD : Form`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/PlantillaAACD.cs).
+
+2. **Polimorfismo con Métodos `virtual`, `abstract` y `override`:**
+   - **Modelos:** Métodos abstractos `ObtenerTipoActividad()`, `ObtenerTitulo()`, `ObtenerDetalle()` implementados con `override` en cada modelo derivado; métodos virtuales `ObtenerResumen()`, `EstaDisponible()` y `EsActiva()` con implementaciones base especializadas.
+   - **Vistas:** Métodos del ciclo de vida `ConfigurarModulo()` y `CargarDatos()` definidos como `virtual` en [`PlantillaAACD.cs`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/PlantillaAACD.cs) y sobreescritos con `override` en los formularios hijos ([`Deportes`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/Deportes.cs), [`Asociaciones`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/Asociaciones.cs), [`Cursos`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/Cursos.cs), [`Arte`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Views/Arte.cs)).
+
+3. **Modificadores de Acceso y Encapsulamiento:**
+   - Uso riguroso de `private readonly` para dependencias inmutables.
+   - Uso de `protected` en clases base para permitir especialización controlada sin exponer miembros a clientes externos.
+   - Constructores privados en el Singleton [`DatabaseConnection`](file:///c:/Users/dougl/OneDrive/Documentos/GitHub/ActividadesExtraPortal/Data/DatabaseConnection.cs) para restringir el ciclo de vida de la instancia.
+

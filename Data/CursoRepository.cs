@@ -6,9 +6,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ActividadesExtraPortal.Data
 {
-    public class CursoRepository
+    public class CursoRepository : BaseRepository, ICursoRepository
     {
-        private readonly DatabaseConnection db = new DatabaseConnection();
+        public List<Curso> ObtenerTodos() => ObtenerTodosLosCursos();
         
         // Obtener catalogo de cursos
         
@@ -161,6 +161,10 @@ namespace ActividadesExtraPortal.Data
                 return $"Error de sistema: {ex.Message}";
             }
         }
+
+        public string InscribirEstudiante(string carnet, int idCurso) => InscribirEstudianteEnCurso(carnet, idCurso);
+
+        public string CancelarInscripcion(string carnet, int idCurso) => CancelarInscripcionCurso(carnet, idCurso);
 
         // Actualizar informacion del curso
         public bool ActualizarCurso(Curso cursoModificado)

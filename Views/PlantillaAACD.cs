@@ -17,6 +17,17 @@ namespace ActividadesExtraPortal.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Método virtual del ciclo de vida para configurar títulos, banners y estilos polimórficamente.
+        /// Las vistas hijas (Deportes, Asociaciones, Arte, Cursos) lo sobreescriben (override).
+        /// </summary>
+        protected virtual void ConfigurarModulo() { }
+
+        /// <summary>
+        /// Método virtual del ciclo de vida para cargar catálogos y datos específicos del módulo polimórficamente.
+        /// </summary>
+        protected virtual void CargarDatos() { }
+
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.formPrincipal.Show();

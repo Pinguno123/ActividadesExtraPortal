@@ -13,26 +13,36 @@ namespace ActividadesExtraPortal
 {
     public partial class Deportes : PlantillaAACD
     {
-        private readonly DeporteRepository deporteRepo = new DeporteRepository();
+        private readonly IDeporteRepository deporteRepo;
 
-        public Deportes(Portal principal)
+        public Deportes(Portal principal, IDeporteRepository? repo = null)
         {
             InitializeComponent();
-
-            this.lblNombreOpcion.Text = "Deportes";
-            this.lblBanner.Text = "Forma parte de las actividades deportivas que te ofrece la UDB";
-            this.lblBanner.ForeColor = Color.White;
-            this.pnBanner.BackColor = Color.FromArgb(26, 86, 219);
-
             this.formPrincipal = principal;
+            this.deporteRepo = repo ?? new DeporteRepository();
+
+            ConfigurarModulo();
 
             // Vincular evento del botón "Mis Participaciones"
             button1.Click += (s, e) => MostrarParticipaciones();
         }
 
-        private void Deportes_Load(object sender, EventArgs e)
+        protected override void ConfigurarModulo()
+        {
+            this.lblNombreOpcion.Text = "Deportes";
+            this.lblBanner.Text = "Forma parte de las actividades deportivas que te ofrece la UDB";
+            this.lblBanner.ForeColor = Color.White;
+            this.pnBanner.BackColor = Color.FromArgb(26, 86, 219);
+        }
+
+        protected override void CargarDatos()
         {
             CargarDeportes();
+        }
+
+        private void Deportes_Load(object sender, EventArgs e)
+        {
+            CargarDatos();
         }
 
         private void CargarDeportes()

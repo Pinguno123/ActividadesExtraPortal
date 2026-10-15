@@ -11,9 +11,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
+using ActividadesExtraPortal.Services;
+
 namespace ActividadesExtraPortal
 {
-    public class PortalGrabber
+    public class PortalGrabber : IScrapingService
     {
         public async Task<Usuario?> IniciarCapturaAsync()
         {

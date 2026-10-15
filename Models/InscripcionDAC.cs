@@ -2,17 +2,29 @@ using System;
 
 namespace ActividadesExtraPortal
 {
-    public class InscripcionDAC
+    public class InscripcionDAC : InscripcionBase
     {
-        public int IdInscripcionDAC { get; set; }
-        public string Carnet { get; set; } = string.Empty;
+        public int IdInscripcionDAC
+        {
+            get => IdInscripcionGeneral;
+            set => IdInscripcionGeneral = value;
+        }
+
         public int IdActividad { get; set; }
-        public DateTime FechaInscripcion { get; set; }
-        public string EstadoInscripcion { get; set; } = "Activa";
+
+        public DateTime FechaInscripcion
+        {
+            get => FechaRegistro;
+            set => FechaRegistro = value;
+        }
+
+        public string EstadoInscripcion
+        {
+            get => EstadoGeneral;
+            set => EstadoGeneral = value;
+        }
 
         // Propiedades auxiliares
-        public string? NombreEstudiante { get; set; }
-        public string? CarreraEstudiante { get; set; }
         public string? NombreActividad { get; set; }
         public string? NombreCategoria { get; set; }
         public string? NombreInstructor { get; set; }
@@ -20,12 +32,16 @@ namespace ActividadesExtraPortal
         public InscripcionDAC() { }
 
         public InscripcionDAC(int idInscripcionDAC, string carnet, int idActividad, DateTime fechaInscripcion, string estadoInscripcion)
+            : base(idInscripcionDAC, carnet, fechaInscripcion, estadoInscripcion)
         {
-            IdInscripcionDAC = idInscripcionDAC;
-            Carnet = carnet;
             IdActividad = idActividad;
-            FechaInscripcion = fechaInscripcion;
-            EstadoInscripcion = estadoInscripcion;
+        }
+
+        public override string ObtenerTitulo() => NombreActividad ?? "Actividad DAC";
+
+        public override string ObtenerDetalle()
+        {
+            return $"Categoría: {NombreCategoria ?? "N/A"} | Instructor: {NombreInstructor ?? "N/A"}";
         }
     }
 }

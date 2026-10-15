@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ActividadesExtraPortal;
 
 namespace ActividadesExtraPortal.Views
 {
@@ -37,6 +38,15 @@ namespace ActividadesExtraPortal.Views
             this.Controls.Add(lblNombre);
             this.Controls.Add(lblDetalle);
             this.Controls.Add(lblEstado);
+        }
+
+        /// <summary>
+        /// Carga los datos de visualización aprovechando el polimorfismo de InscripcionBase (Principio LSP).
+        /// </summary>
+        public void CargarDatos(InscripcionBase inscripcion)
+        {
+            if (inscripcion == null) return;
+            CargarDatos(inscripcion.ObtenerTitulo(), inscripcion.ObtenerDetalle(), inscripcion.EstadoGeneral);
         }
 
         public void CargarDatos(string nombre, string detalle, string estado)

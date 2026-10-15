@@ -5,9 +5,9 @@ using Microsoft.Data.SqlClient;
 
 namespace ActividadesExtraPortal.Data
 {
-    public class AsociacionRepository
+    public class AsociacionRepository : BaseRepository, IAsociacionRepository
     {
-        private readonly DatabaseConnection db = new DatabaseConnection();
+        public List<Asociacion> ObtenerTodos() => ObtenerTodasLasAsociaciones();
 
         /// <summary>
         /// Obtiene todas las asociaciones estudiantiles desde la tabla Asociaciones.
@@ -158,6 +158,18 @@ namespace ActividadesExtraPortal.Data
             {
                 return $"Error de sistema: {ex.Message}";
             }
+        }
+
+        public string CancelarMembresia(string carnet, int idAsociacion) => CancelarMembresiaAsociacion(carnet, idAsociacion);
+
+        public string InscribirOActualizarMembresia(string carnet, int idAsociacion, string rol, string nuevoEstado)
+        {
+            string res = InscribirMembresiaAsociacion(carnet, idAsociacion, rol);
+            if (!string.IsNullOrEmpty(nuevoEstado))
+            {
+                ActualizarEstadoMembresia(carnet, idAsociacion, nuevoEstado);
+            }
+            return res;
         }
 
         /// <summary>

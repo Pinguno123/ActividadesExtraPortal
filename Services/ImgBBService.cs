@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ActividadesExtraPortal.Services
 {
-    public class ImgBBService
+    public class ImgBBService : IImageService
     {
         private static readonly HttpClient client = new HttpClient();
 

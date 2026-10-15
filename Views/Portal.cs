@@ -41,7 +41,7 @@ namespace ActividadesExtraPortal
             // Validar rol de administrador
             try
             {
-                var repo = new ActividadesExtraPortal.Data.UsuarioRepository();
+                ActividadesExtraPortal.Data.IUsuarioRepository repo = new ActividadesExtraPortal.Data.UsuarioRepository();
                 string? rolActual = repo.ObtenerRolActual(usuarioActual.Id);
                 if (rolActual == "Administrador")
                 {
@@ -238,10 +238,7 @@ namespace ActividadesExtraPortal
                 {
                     foreach (var a in inscripcionesArte.Where(x => x.EstadoInscripcion == "Activa"))
                     {
-                        var tarjeta = new ActividadInscritaTarjeta();
-                        tarjeta.CargarDatos(a.NombreActividad ?? "", 
-                            "Categoría: " + a.NombreCategoria + " | Instructor: " + (a.NombreInstructor ?? "N/A"), 
-                            a.EstadoInscripcion);
+                        var tarjeta = TarjetaFactory.CrearTarjeta(a);
                         flpArte.Controls.Add(tarjeta);
                     }
                 }
@@ -256,10 +253,7 @@ namespace ActividadesExtraPortal
                 {
                     foreach (var m in activas)
                     {
-                        var tarjeta = new ActividadInscritaTarjeta();
-                        tarjeta.CargarDatos(m.NombreAsociacion ?? "", 
-                            "Acrónimo: " + m.AcronimoAsociacion + " | Solicitado: " + m.FechaSolicitud.ToShortDateString(), 
-                            m.EstadoValidacion);
+                        var tarjeta = TarjetaFactory.CrearTarjeta(m);
                         flpAsoc.Controls.Add(tarjeta);
                     }
                 }
@@ -274,10 +268,7 @@ namespace ActividadesExtraPortal
                 {
                     foreach (var p in participaciones)
                     {
-                        var tarjeta = new ActividadInscritaTarjeta();
-                        tarjeta.CargarDatos(p.NombreEquipo ?? "", 
-                            "Disciplina: " + p.Disciplina + " | Rama: " + p.Rama + " | Mod: " + p.Modalidad, 
-                            "Participando");
+                        var tarjeta = TarjetaFactory.CrearTarjeta(p);
                         flpDeportes.Controls.Add(tarjeta);
                     }
                 }
@@ -292,10 +283,7 @@ namespace ActividadesExtraPortal
                 {
                     foreach (var c in cursosActivos)
                     {
-                        var tarjeta = new ActividadInscritaTarjeta();
-                        tarjeta.CargarDatos(c.NombreCurso ?? "", 
-                            "Instructor: " + (c.NombreInstructor ?? "N/A") + " | Nota: " + (c.Nota.HasValue ? c.Nota.Value.ToString("F1") : "Pendiente"), 
-                            c.EstadoInscripcion);
+                        var tarjeta = TarjetaFactory.CrearTarjeta(c);
                         flpCursos.Controls.Add(tarjeta);
                     }
                 }

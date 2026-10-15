@@ -5,9 +5,9 @@ using Microsoft.Data.SqlClient;
 
 namespace ActividadesExtraPortal.Data
 {
-    public class UsuarioRepository
+    public class UsuarioRepository : BaseRepository, IUsuarioRepository
     {
-        private readonly DatabaseConnection db = new DatabaseConnection();
+        public List<Usuario> ObtenerTodos() => ObtenerTodosLosUsuarios();
 
         // Asegurar roles por defecto
         public void AsegurarRolesPorDefecto()
