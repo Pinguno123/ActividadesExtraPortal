@@ -10,6 +10,49 @@ namespace ActividadesExtraPortal.Data
         public List<ActividadDAC> ObtenerTodos() => ObtenerTodasLasActividades();
 
         /// <summary>
+        /// Asegura que existan las 3 categorías canónicas de Arte y Cultura en la base de datos.
+        /// </summary>
+        public void AsegurarCategoriasBase()
+        {
+            try
+            {
+                using (var conn = db.GetConnection())
+                {
+                    string script = @"
+                        IF NOT EXISTS (SELECT 1 FROM CategoriasDAC WHERE NombreCategoria LIKE '%Extensi%')
+                            INSERT INTO CategoriasDAC (NombreCategoria, Descripcion) VALUES ('Grupos de Extensión', 'Espacio para el desarrollo de habilidades y talentos artísticos extracurriculares.');
+                        IF NOT EXISTS (SELECT 1 FROM CategoriasDAC WHERE NombreCategoria LIKE '%Formaci%')
+                            INSERT INTO CategoriasDAC (NombreCategoria, Descripcion) VALUES ('Programas de Formación', 'Cursos, talleres y diplomados en diferentes disciplinas artísticas.');
+                        IF NOT EXISTS (SELECT 1 FROM CategoriasDAC WHERE NombreCategoria LIKE '%Voluntari%')
+                            INSERT INTO CategoriasDAC (NombreCategoria, Descripcion) VALUES ('Voluntariado Cultural', 'Promoción y apoyo en eventos culturales y artísticos universitarios.');";
+
+                    using (SqlCommand cmd = new SqlCommand(script, conn))
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al asegurar categorías base DAC: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Obtiene las actividades que corresponden a una categoría específica por coincidencia de nombre.
+        /// </summary>
+        public List<ActividadDAC> ObtenerActividadesPorCategoria(string nombreCategoria)
+        {
+            var todas = ObtenerTodasLasActividades();
+            if (string.IsNullOrWhiteSpace(nombreCategoria)) return todas;
+
+            return todas.FindAll(a =>
+                !string.IsNullOrEmpty(a.NombreCategoria) &&
+                a.NombreCategoria.IndexOf(nombreCategoria, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        /// <summary>
         /// Obtiene todas las actividades artísticas disponibles (DAC) con sus categorías e instructores.
         /// </summary>
         public List<ActividadDAC> ObtenerTodasLasActividades()

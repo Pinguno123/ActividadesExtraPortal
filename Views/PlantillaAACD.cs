@@ -11,10 +11,18 @@ namespace ActividadesExtraPortal.Views
     public partial class PlantillaAACD : Form
     {
         protected Portal formPrincipal = null!;
+        protected Form? formPadre = null;
+        private bool navegandoRegreso = false;
 
         public PlantillaAACD()
         {
             InitializeComponent();
+        }
+
+        public PlantillaAACD(Portal principal, Form? padre = null) : this()
+        {
+            this.formPrincipal = principal;
+            this.formPadre = padre;
         }
 
         /// <summary>
@@ -30,15 +38,38 @@ namespace ActividadesExtraPortal.Views
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            this.formPrincipal.Show();
-            this.Close();
+            navegandoRegreso = true;
+            if (this.formPadre != null && !this.formPadre.IsDisposed)
+            {
+                this.formPadre.Show();
+                this.Close();
+            }
+            else if (this.formPrincipal != null && !this.formPrincipal.IsDisposed)
+            {
+                this.formPrincipal.Show();
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         private void PlantillaAACD_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing && !this.formPrincipal.Visible)
+            // Si el cierre fue provocado por navegación de regreso, evitar cerrar la aplicación
+            if (navegandoRegreso) return;
+
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                Application.Exit();
+                if (this.formPadre != null && !this.formPadre.IsDisposed)
+                {
+                    this.formPadre.Show();
+                }
+                else if (this.formPrincipal != null && !this.formPrincipal.IsDisposed && !this.formPrincipal.Visible)
+                {
+                    Application.Exit();
+                }
             }
         }
     }

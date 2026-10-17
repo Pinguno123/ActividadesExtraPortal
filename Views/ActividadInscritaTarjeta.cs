@@ -13,24 +13,24 @@ namespace ActividadesExtraPortal.Views
 
         public ActividadInscritaTarjeta()
         {
-            this.Size = new Size(635, 80);
+            this.Size = new Size(600, 75);
             this.BackColor = Color.White;
             this.BorderStyle = BorderStyle.FixedSingle;
 
             lblNombre = new Label();
-            lblNombre.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            lblNombre.Font = new Font("Segoe UI Semibold", 10.5F, FontStyle.Bold);
             lblNombre.ForeColor = Color.FromArgb(0, 48, 135); // Azul UDB
-            lblNombre.Location = new Point(15, 12);
+            lblNombre.Location = new Point(14, 10);
             lblNombre.AutoSize = true;
 
             lblDetalle = new Label();
-            lblDetalle.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular);
+            lblDetalle.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
             lblDetalle.ForeColor = Color.DimGray;
-            lblDetalle.Location = new Point(15, 42);
+            lblDetalle.Location = new Point(14, 38);
             lblDetalle.AutoSize = true;
 
             lblEstado = new Label();
-            lblEstado.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblEstado.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             lblEstado.Padding = new Padding(6, 3, 6, 3);
             lblEstado.TextAlign = ContentAlignment.MiddleCenter;
             lblEstado.AutoSize = true;
@@ -38,6 +38,43 @@ namespace ActividadesExtraPortal.Views
             this.Controls.Add(lblNombre);
             this.Controls.Add(lblDetalle);
             this.Controls.Add(lblEstado);
+
+            // Reenviar eventos de rueda del mouse para permitir desplazamiento fluido
+            this.MouseWheel += ReenviarMouseWheel;
+            lblNombre.MouseWheel += ReenviarMouseWheel;
+            lblDetalle.MouseWheel += ReenviarMouseWheel;
+            lblEstado.MouseWheel += ReenviarMouseWheel;
+
+            this.MouseEnter += AsegurarFocoPadre;
+            lblNombre.MouseEnter += AsegurarFocoPadre;
+            lblDetalle.MouseEnter += AsegurarFocoPadre;
+            lblEstado.MouseEnter += AsegurarFocoPadre;
+
+            this.Resize += (s, e) =>
+            {
+                if (lblEstado != null)
+                {
+                    lblEstado.Location = new Point(this.Width - lblEstado.Width - 15, (this.Height - lblEstado.Height) / 2);
+                }
+            };
+        }
+
+        private void AsegurarFocoPadre(object? sender, EventArgs e)
+        {
+            if (this.Parent is FlowLayoutPanel flp && !flp.Focused)
+            {
+                flp.Focus();
+            }
+        }
+
+        private void ReenviarMouseWheel(object? sender, MouseEventArgs e)
+        {
+            if (this.Parent is FlowLayoutPanel flp)
+            {
+                int nuevoY = -flp.AutoScrollPosition.Y - (e.Delta / 2);
+                if (nuevoY < 0) nuevoY = 0;
+                flp.AutoScrollPosition = new Point(0, nuevoY);
+            }
         }
 
         /// <summary>
@@ -78,7 +115,7 @@ namespace ActividadesExtraPortal.Views
             }
 
             this.PerformLayout();
-            lblEstado.Location = new Point(this.Width - lblEstado.Width - 15, 25);
+            lblEstado.Location = new Point(this.Width - lblEstado.Width - 15, (this.Height - lblEstado.Height) / 2);
         }
     }
 }

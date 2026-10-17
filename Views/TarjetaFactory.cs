@@ -35,5 +35,24 @@ namespace ActividadesExtraPortal.Views
             tarjeta.CargarDatos(titulo, detalle, estado);
             return tarjeta;
         }
+
+        /// <summary>
+        /// Crea e inicializa un control GrupoExtensionTarjeta (Patrón Factory).
+        /// </summary>
+        public static GrupoExtensionTarjeta CrearGrupoExtensionTarjeta(ActividadDAC actividad, bool estaInscrito, EventHandler? onInscribirClick = null)
+        {
+            if (actividad == null)
+            {
+                throw new ArgumentNullException(nameof(actividad), "La actividad DAC no puede ser nula.");
+            }
+
+            var tarjeta = new GrupoExtensionTarjeta();
+            tarjeta.CargarDatos(actividad, estaInscrito);
+            if (onInscribirClick != null)
+            {
+                tarjeta.BotonInscribirClick += onInscribirClick;
+            }
+            return tarjeta;
+        }
     }
 }

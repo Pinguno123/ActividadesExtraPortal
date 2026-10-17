@@ -210,35 +210,38 @@ namespace ActividadesExtraPortal
                 // 1. Obtener registros y contar para los paneles superiores
                 var arteRepo = new ActividadesExtraPortal.Data.ArteRepository();
                 var inscripcionesArte = arteRepo.ObtenerInscripcionesDACEstudiante(carnet);
-                bool tieneArte = inscripcionesArte != null && inscripcionesArte.Count > 0;
-                ActualizarVisualizacionPanel(panel8, label5, "Arte y Cultura", tieneArte, inscripcionesArte?.Count ?? 0);
+                var activasArte = inscripcionesArte?.Where(x => x.EstadoInscripcion == "Activa").ToList() ?? new List<InscripcionDAC>();
+                bool tieneArte = activasArte.Count > 0;
+                ActualizarVisualizacionPanel(panel8, label5, "Arte y Cultura", tieneArte, activasArte.Count);
 
                 var asoRepo = new ActividadesExtraPortal.Data.AsociacionRepository();
                 var membresias = asoRepo.ObtenerMembresiasEstudiante(carnet);
-                var activas = membresias.Where(m => m.EstadoValidacion == "Aprobada" || m.EstadoValidacion == "Pendiente").ToList();
-                bool tieneAsociaciones = activas.Count > 0;
-                ActualizarVisualizacionPanel(panel9, label6, "Asociaciones", tieneAsociaciones, tieneAsociaciones ? activas.Count : 0);
+                var activasAsoc = membresias?.Where(m => m.EstadoValidacion == "Aprobada" || m.EstadoValidacion == "Pendiente").ToList() ?? new List<MembresiaAsociacion>();
+                bool tieneAsociaciones = activasAsoc.Count > 0;
+                ActualizarVisualizacionPanel(panel9, label6, "Asociaciones", tieneAsociaciones, activasAsoc.Count);
 
                 var deporteRepo = new ActividadesExtraPortal.Data.DeporteRepository();
-                var participaciones = deporteRepo.ObtenerParticipacionesEstudiante(carnet);
-                bool tieneDeportes = participaciones != null && participaciones.Count > 0;
-                ActualizarVisualizacionPanel(panel10, label7, "Deportes", tieneDeportes, participaciones?.Count ?? 0);
+                var participaciones = deporteRepo.ObtenerParticipacionesEstudiante(carnet) ?? new List<ParticipacionDeportiva>();
+                bool tieneDeportes = participaciones.Count > 0;
+                ActualizarVisualizacionPanel(panel10, label7, "Deportes", tieneDeportes, participaciones.Count);
 
                 var cursoRepo = new ActividadesExtraPortal.Data.CursoRepository();
                 var inscripcionesCurso = cursoRepo.ObtenerInscripcionesEstudiante(carnet);
-                var cursosActivos = inscripcionesCurso.Where(c => c.EstadoInscripcion == "Confirmada" || c.EstadoInscripcion == "Pre-inscrito").ToList();
+                var cursosActivos = inscripcionesCurso?.Where(c => c.EstadoInscripcion == "Confirmada" || c.EstadoInscripcion == "Pre-inscrito").ToList() ?? new List<InscripcionCurso>();
                 bool tieneCursos = cursosActivos.Count > 0;
-                ActualizarVisualizacionPanel(panel11, label8, "Cursos", tieneCursos, tieneCursos ? cursosActivos.Count : 0);
+                ActualizarVisualizacionPanel(panel11, label8, "Cursos", tieneCursos, cursosActivos.Count);
 
                 // 2. Llenar los paneles horizontales de abajo según su categoría correspondiente
 
                 // A. Arte y Cultura (pnArte)
                 var flpArte = GetFlowLayoutPanel(pnArte);
-                if (tieneArte && inscripcionesArte != null && inscripcionesArte.Count > 0)
+                if (tieneArte)
                 {
-                    foreach (var a in inscripcionesArte.Where(x => x.EstadoInscripcion == "Activa"))
+                    foreach (var a in activasArte)
                     {
                         var tarjeta = TarjetaFactory.CrearTarjeta(a);
+                        tarjeta.Width = 600;
+                        tarjeta.Margin = new Padding(3, 2, 3, 2);
                         flpArte.Controls.Add(tarjeta);
                     }
                 }
@@ -249,11 +252,13 @@ namespace ActividadesExtraPortal
 
                 // B. Panel de Asociaciones (pnAsoc)
                 var flpAsoc = GetFlowLayoutPanel(pnAsoc);
-                if (tieneAsociaciones && activas.Count > 0)
+                if (tieneAsociaciones)
                 {
-                    foreach (var m in activas)
+                    foreach (var m in activasAsoc)
                     {
                         var tarjeta = TarjetaFactory.CrearTarjeta(m);
+                        tarjeta.Width = 600;
+                        tarjeta.Margin = new Padding(3, 2, 3, 2);
                         flpAsoc.Controls.Add(tarjeta);
                     }
                 }
@@ -264,11 +269,13 @@ namespace ActividadesExtraPortal
 
                 // C. Panel de Deportes (pnDeportes)
                 var flpDeportes = GetFlowLayoutPanel(pnDeportes);
-                if (tieneDeportes && participaciones != null && participaciones.Count > 0)
+                if (tieneDeportes)
                 {
                     foreach (var p in participaciones)
                     {
                         var tarjeta = TarjetaFactory.CrearTarjeta(p);
+                        tarjeta.Width = 600;
+                        tarjeta.Margin = new Padding(3, 2, 3, 2);
                         flpDeportes.Controls.Add(tarjeta);
                     }
                 }
@@ -279,11 +286,13 @@ namespace ActividadesExtraPortal
 
                 // D. Panel de Cursos (pnCursos)
                 var flpCursos = GetFlowLayoutPanel(pnCursos);
-                if (tieneCursos && cursosActivos.Count > 0)
+                if (tieneCursos)
                 {
                     foreach (var c in cursosActivos)
                     {
                         var tarjeta = TarjetaFactory.CrearTarjeta(c);
+                        tarjeta.Width = 600;
+                        tarjeta.Margin = new Padding(3, 2, 3, 2);
                         flpCursos.Controls.Add(tarjeta);
                     }
                 }
@@ -311,10 +320,23 @@ namespace ActividadesExtraPortal
 
             FlowLayoutPanel newFlp = new FlowLayoutPanel();
             newFlp.Dock = DockStyle.Fill;
-            newFlp.FlowDirection = FlowDirection.TopDown;
-            newFlp.WrapContents = false;
+            newFlp.FlowDirection = FlowDirection.LeftToRight;
+            newFlp.WrapContents = true;
             newFlp.AutoScroll = true;
             newFlp.BackColor = Color.Transparent;
+
+            // Desactivar completamente scroll horizontal para forzar visualización vertical limpia
+            newFlp.HorizontalScroll.Maximum = 0;
+            newFlp.HorizontalScroll.Enabled = false;
+            newFlp.HorizontalScroll.Visible = false;
+
+            newFlp.MouseEnter += (s, e) =>
+            {
+                if (!newFlp.Focused)
+                {
+                    newFlp.Focus();
+                }
+            };
 
             parent.Controls.Clear();
             parent.Controls.Add(newFlp);

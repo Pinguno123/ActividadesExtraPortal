@@ -33,6 +33,8 @@
             rbOfertados = new RadioButton();
             rbInscritos = new RadioButton();
             label1 = new Label();
+            btnRetirar = new Button();
+            btnInscribir = new Button();
             pnBanner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCursos).BeginInit();
             panel1.SuspendLayout();
@@ -44,7 +46,7 @@
             dgvCursos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCursos.Location = new Point(118, 211);
             dgvCursos.Name = "dgvCursos";
-            dgvCursos.Size = new Size(948, 510);
+            dgvCursos.Size = new Size(948, 462);
             dgvCursos.TabIndex = 14;
             // 
             // panel1
@@ -93,11 +95,31 @@
             label1.Size = new Size(0, 20);
             label1.TabIndex = 0;
             // 
+            // btnRetirar
+            // 
+            btnRetirar.Location = new Point(760, 679);
+            btnRetirar.Name = "btnRetirar";
+            btnRetirar.Size = new Size(150, 50);
+            btnRetirar.TabIndex = 20;
+            btnRetirar.Text = "Retirar";
+            btnRetirar.UseVisualStyleBackColor = true;
+            // 
+            // btnInscribir
+            // 
+            btnInscribir.Location = new Point(916, 679);
+            btnInscribir.Name = "btnInscribir";
+            btnInscribir.Size = new Size(150, 50);
+            btnInscribir.TabIndex = 19;
+            btnInscribir.Text = "Inscribirse";
+            btnInscribir.UseVisualStyleBackColor = true;
+            // 
             // Cursos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 761);
+            Controls.Add(btnRetirar);
+            Controls.Add(btnInscribir);
             Controls.Add(panel1);
             Controls.Add(dgvCursos);
             Name = "Cursos";
@@ -106,6 +128,8 @@
             Controls.SetChildIndex(pnBanner, 0);
             Controls.SetChildIndex(dgvCursos, 0);
             Controls.SetChildIndex(panel1, 0);
+            Controls.SetChildIndex(btnInscribir, 0);
+            Controls.SetChildIndex(btnRetirar, 0);
             pnBanner.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvCursos).EndInit();
             panel1.ResumeLayout(false);
@@ -120,5 +144,7 @@
         private Label label1;
         private RadioButton rbInscritos;
         private RadioButton rbOfertados;
+        private Button btnRetirar;
+        private Button btnInscribir;
     }
 }
