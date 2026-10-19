@@ -227,5 +227,52 @@ namespace ActividadesExtraPortal.Data
             }
             return lista;
         }
+
+        /// <summary>
+        /// Obtiene únicamente los usuarios con rol de Instructor y que se encuentren activos.
+        /// Cumple con la regla de negocio de fn_ValidarInstructor.
+        /// </summary>
+        public List<Usuario> ObtenerInstructores()
+        {
+            List<Usuario> lista = new List<Usuario>();
+            try
+            {
+                using (var conn = db.GetConnection())
+                {
+                    string query = @"
+                        SELECT u.Carnet, u.NombreCompleto, u.Carrera, u.Campus, u.Activo, u.CorreoElectronico, u.IdRol
+                        FROM Usuarios u
+                        JOIN Roles r ON u.IdRol = r.IdRol
+                        WHERE r.NombreRol = 'Instructor' AND u.Activo = 1
+                        ORDER BY u.NombreCompleto";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        using (SqlDataReader r = cmd.ExecuteReader())
+                        {
+                            while (r.Read())
+                            {
+                                lista.Add(new Usuario
+                                {
+                                    Id = r["Carnet"].ToString() ?? "",
+                                    Nombre = r["NombreCompleto"].ToString() ?? "",
+                                    Carrera = r["Carrera"]?.ToString() ?? "",
+                                    Campus = r["Campus"]?.ToString() ?? "",
+                                    Activo = Convert.ToBoolean(r["Activo"]),
+                                    CorreoElectronico = r["CorreoElectronico"]?.ToString() ?? "",
+                                    IdRol = Convert.ToInt32(r["IdRol"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener instructores: {ex.Message}");
+            }
+            return lista;
+        }
     }
 }

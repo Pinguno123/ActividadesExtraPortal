@@ -10,5 +10,6 @@ namespace ActividadesExtraPortal.Data
         string? ObtenerRolActual(string carnet);
         bool RegistrarOActualizarUsuario(Usuario usuario);
         List<Usuario> ObtenerTodosLosUsuarios();
+        List<Usuario> ObtenerInstructores();
     }
 }

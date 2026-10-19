@@ -192,5 +192,43 @@ namespace ActividadesExtraPortal.Data
                 throw;
             }
         }
+
+        /// <summary>
+        /// Actualiza una selección deportiva existente en la tabla SeleccionesDeportivas.
+        /// </summary>
+        public bool ActualizarSeleccionDeportiva(SeleccionDeportiva deporte)
+        {
+            try
+            {
+                using (var conn = db.GetConnection())
+                {
+                    string query = @"
+                        UPDATE SeleccionesDeportivas 
+                        SET Disciplina = @Disciplina,
+                            Rama = @Rama,
+                            NombreEquipo = @NombreEquipo,
+                            ImgUrl = CASE WHEN @ImgUrl IS NOT NULL AND @ImgUrl <> '' THEN @ImgUrl ELSE ImgUrl END
+                        WHERE IdSeleccion = @IdSeleccion";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdSeleccion", deporte.IdSeleccion);
+                        cmd.Parameters.AddWithValue("@Disciplina", deporte.Disciplina);
+                        cmd.Parameters.AddWithValue("@Rama", deporte.Rama);
+                        cmd.Parameters.AddWithValue("@NombreEquipo", deporte.NombreEquipo);
+                        cmd.Parameters.AddWithValue("@ImgUrl", (object?)deporte.ImgUrl ?? DBNull.Value);
+
+                        conn.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar selección deportiva: {ex.Message}");
+                throw;
+            }
+        }
     }
 }

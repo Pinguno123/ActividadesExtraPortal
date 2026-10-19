@@ -277,5 +277,43 @@ namespace ActividadesExtraPortal.Data
                 throw;
             }
         }
+
+        /// <summary>
+        /// Actualiza una actividad artística (DAC) existente en la tabla ActividadesDAC.
+        /// </summary>
+        public bool ActualizarActividadDAC(ActividadDAC arte)
+        {
+            try
+            {
+                using (var conn = db.GetConnection())
+                {
+                    string query = @"
+                        UPDATE ActividadesDAC 
+                        SET IdCategoria = @IdCategoria,
+                            NombreActividad = @NombreActividad,
+                            Descripcion = @Descripcion,
+                            CarnetInstructor = @CarnetInstructor
+                        WHERE IdActividad = @IdActividad";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdActividad", arte.IdActividad);
+                        cmd.Parameters.AddWithValue("@IdCategoria", arte.IdCategoria);
+                        cmd.Parameters.AddWithValue("@NombreActividad", arte.NombreActividad);
+                        cmd.Parameters.AddWithValue("@Descripcion", (object?)arte.Descripcion ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CarnetInstructor", (object?)arte.CarnetInstructor ?? DBNull.Value);
+
+                        conn.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar actividad DAC: {ex.Message}");
+                throw;
+            }
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace ActividadesExtraPortal.Data
         string InscribirOActualizarParticipacion(string carnet, int idSeleccion, string? modalidad, string nuevoEstado);
         string CancelarParticipacionDeportiva(string carnet, int idSeleccion);
         bool CrearSeleccionDeportiva(SeleccionDeportiva deporte);
+        bool ActualizarSeleccionDeportiva(SeleccionDeportiva deporte);
     }
 }

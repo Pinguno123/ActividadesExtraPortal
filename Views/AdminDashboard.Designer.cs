@@ -60,6 +60,7 @@ namespace ActividadesExtraPortal
             txtAsoRutaImg = new TextBox();
             btnAsoBuscarImg = new Button();
             btnCrearAso = new Button();
+            btnActualizarAso = new Button();
             tabDeportes = new TabPage();
             gridDeportes = new DataGridView();
             lblDepDisciplina = new Label();
@@ -72,6 +73,7 @@ namespace ActividadesExtraPortal
             txtDepRutaImg = new TextBox();
             btnDepBuscarImg = new Button();
             btnCrearDeporte = new Button();
+            btnActualizarDeporte = new Button();
             tabArte = new TabPage();
             gridArte = new DataGridView();
             lblArteCatId = new Label();
@@ -83,6 +85,7 @@ namespace ActividadesExtraPortal
             lblArteInstructor = new Label();
             cboArteInstructor = new ComboBox();
             btnCrearArte = new Button();
+            btnActualizarArte = new Button();
             PanelHeader.SuspendLayout();
             tabAdminCrud.SuspendLayout();
             tabCursos.SuspendLayout();
@@ -364,6 +367,7 @@ namespace ActividadesExtraPortal
             tabAsociaciones.Controls.Add(txtAsoRutaImg);
             tabAsociaciones.Controls.Add(btnAsoBuscarImg);
             tabAsociaciones.Controls.Add(btnCrearAso);
+            tabAsociaciones.Controls.Add(btnActualizarAso);
             tabAsociaciones.Location = new Point(4, 26);
             tabAsociaciones.Name = "tabAsociaciones";
             tabAsociaciones.Size = new Size(1142, 650);
@@ -489,11 +493,24 @@ namespace ActividadesExtraPortal
             btnCrearAso.ForeColor = Color.White;
             btnCrearAso.Location = new Point(740, 500);
             btnCrearAso.Name = "btnCrearAso";
-            btnCrearAso.Size = new Size(370, 40);
+            btnCrearAso.Size = new Size(175, 40);
             btnCrearAso.TabIndex = 14;
             btnCrearAso.Text = "Crear Asociación";
             btnCrearAso.UseVisualStyleBackColor = false;
             btnCrearAso.Click += btnCrearAso_Click;
+            // 
+            // btnActualizarAso
+            // 
+            btnActualizarAso.BackColor = Color.FromArgb(24, 131, 81);
+            btnActualizarAso.FlatStyle = FlatStyle.Flat;
+            btnActualizarAso.ForeColor = Color.White;
+            btnActualizarAso.Location = new Point(935, 500);
+            btnActualizarAso.Name = "btnActualizarAso";
+            btnActualizarAso.Size = new Size(175, 40);
+            btnActualizarAso.TabIndex = 15;
+            btnActualizarAso.Text = "Actualizar Asociación";
+            btnActualizarAso.UseVisualStyleBackColor = false;
+            btnActualizarAso.Click += btnActualizarAso_Click;
             // 
             // tabDeportes
             // 
@@ -508,6 +525,7 @@ namespace ActividadesExtraPortal
             tabDeportes.Controls.Add(txtDepRutaImg);
             tabDeportes.Controls.Add(btnDepBuscarImg);
             tabDeportes.Controls.Add(btnCrearDeporte);
+            tabDeportes.Controls.Add(btnActualizarDeporte);
             tabDeportes.Location = new Point(4, 26);
             tabDeportes.Name = "tabDeportes";
             tabDeportes.Size = new Size(1142, 650);
@@ -601,11 +619,24 @@ namespace ActividadesExtraPortal
             btnCrearDeporte.ForeColor = Color.White;
             btnCrearDeporte.Location = new Point(740, 260);
             btnCrearDeporte.Name = "btnCrearDeporte";
-            btnCrearDeporte.Size = new Size(370, 40);
+            btnCrearDeporte.Size = new Size(175, 40);
             btnCrearDeporte.TabIndex = 10;
-            btnCrearDeporte.Text = "Crear Selección Deportiva";
+            btnCrearDeporte.Text = "Crear Deporte";
             btnCrearDeporte.UseVisualStyleBackColor = false;
             btnCrearDeporte.Click += btnCrearDeporte_Click;
+            // 
+            // btnActualizarDeporte
+            // 
+            btnActualizarDeporte.BackColor = Color.FromArgb(24, 131, 81);
+            btnActualizarDeporte.FlatStyle = FlatStyle.Flat;
+            btnActualizarDeporte.ForeColor = Color.White;
+            btnActualizarDeporte.Location = new Point(935, 260);
+            btnActualizarDeporte.Name = "btnActualizarDeporte";
+            btnActualizarDeporte.Size = new Size(175, 40);
+            btnActualizarDeporte.TabIndex = 11;
+            btnActualizarDeporte.Text = "Actualizar Deporte";
+            btnActualizarDeporte.UseVisualStyleBackColor = false;
+            btnActualizarDeporte.Click += btnActualizarDeporte_Click;
             // 
             // tabArte
             // 
@@ -619,6 +650,7 @@ namespace ActividadesExtraPortal
             tabArte.Controls.Add(lblArteInstructor);
             tabArte.Controls.Add(cboArteInstructor);
             tabArte.Controls.Add(btnCrearArte);
+            tabArte.Controls.Add(btnActualizarArte);
             tabArte.Location = new Point(4, 26);
             tabArte.Name = "tabArte";
             tabArte.Size = new Size(1142, 650);
@@ -703,11 +735,24 @@ namespace ActividadesExtraPortal
             btnCrearArte.ForeColor = Color.White;
             btnCrearArte.Location = new Point(740, 270);
             btnCrearArte.Name = "btnCrearArte";
-            btnCrearArte.Size = new Size(370, 40);
+            btnCrearArte.Size = new Size(175, 40);
             btnCrearArte.TabIndex = 9;
-            btnCrearArte.Text = "Crear Actividad DAC";
+            btnCrearArte.Text = "Crear Actividad";
             btnCrearArte.UseVisualStyleBackColor = false;
             btnCrearArte.Click += btnCrearArte_Click;
+            // 
+            // btnActualizarArte
+            // 
+            btnActualizarArte.BackColor = Color.FromArgb(24, 131, 81);
+            btnActualizarArte.FlatStyle = FlatStyle.Flat;
+            btnActualizarArte.ForeColor = Color.White;
+            btnActualizarArte.Location = new Point(935, 270);
+            btnActualizarArte.Name = "btnActualizarArte";
+            btnActualizarArte.Size = new Size(175, 40);
+            btnActualizarArte.TabIndex = 10;
+            btnActualizarArte.Text = "Actualizar Actividad";
+            btnActualizarArte.UseVisualStyleBackColor = false;
+            btnActualizarArte.Click += btnActualizarArte_Click;
             // 
             // AdminDashboard
             // 
@@ -787,6 +832,7 @@ namespace ActividadesExtraPortal
         private TextBox txtAsoRutaImg;
         private Button btnAsoBuscarImg;
         private Button btnCrearAso;
+        private Button btnActualizarAso;
 
         // Tab Deportes Controls
         private TabPage tabDeportes;
@@ -801,6 +847,7 @@ namespace ActividadesExtraPortal
         private TextBox txtDepRutaImg;
         private Button btnDepBuscarImg;
         private Button btnCrearDeporte;
+        private Button btnActualizarDeporte;
 
         // Tab Arte Controls
         private TabPage tabArte;
@@ -814,5 +861,6 @@ namespace ActividadesExtraPortal
         private Label lblArteInstructor;
         private ComboBox cboArteInstructor;
         private Button btnCrearArte;
+        private Button btnActualizarArte;
     }
 }

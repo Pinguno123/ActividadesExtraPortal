@@ -14,5 +14,6 @@ namespace ActividadesExtraPortal.Data
         string InscribirActividadDAC(string carnet, int idActividad);
         string CancelarInscripcionDAC(string carnet, int idActividad);
         bool CrearActividadDAC(ActividadDAC arte);
+        bool ActualizarActividadDAC(ActividadDAC arte);
     }
 }

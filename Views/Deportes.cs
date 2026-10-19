@@ -23,6 +23,10 @@ namespace ActividadesExtraPortal
 
             ConfigurarModulo();
 
+            // Habilitar desplazamiento y foco para interacción con la rueda del ratón
+            flpDeportesTarjeta.AutoScroll = true;
+            flpDeportesTarjeta.MouseEnter += (s, e) => { if (!flpDeportesTarjeta.Focused) flpDeportesTarjeta.Focus(); };
+
             // Vincular evento del botón "Mis Participaciones"
             button1.Click += (s, e) => MostrarParticipaciones();
         }

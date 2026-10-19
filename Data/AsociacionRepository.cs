@@ -205,6 +205,48 @@ namespace ActividadesExtraPortal.Data
         }
 
         /// <summary>
+        /// Actualiza los datos de una asociación existente en la tabla Asociaciones.
+        /// </summary>
+        public bool ActualizarAsociacion(Asociacion aso)
+        {
+            try
+            {
+                using (var conn = db.GetConnection())
+                {
+                    string query = @"
+                        UPDATE Asociaciones 
+                        SET Acronimo = @Acronimo,
+                            Nombre = @Nombre,
+                            AnioFundacion = @AnioFundacion,
+                            Descripcion = @Descripcion,
+                            Formulario = @Formulario,
+                            ImgUrl = CASE WHEN @ImgUrl IS NOT NULL AND @ImgUrl <> '' THEN @ImgUrl ELSE ImgUrl END
+                        WHERE IdAsociacion = @IdAsociacion";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdAsociacion", aso.IdAsociacion);
+                        cmd.Parameters.AddWithValue("@Acronimo", aso.Acronimo);
+                        cmd.Parameters.AddWithValue("@Nombre", aso.Nombre);
+                        cmd.Parameters.AddWithValue("@AnioFundacion", (object?)aso.AnioFundacion ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Descripcion", (object?)aso.Descripcion ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Formulario", (object?)aso.Formulario ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@ImgUrl", (object?)aso.ImgUrl ?? DBNull.Value);
+
+                        conn.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar asociación: {ex.Message}");
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Actualiza el estado de validación de la membresía de un estudiante.
         /// </summary>
         public bool ActualizarEstadoMembresia(string carnet, int idAsociacion, string nuevoEstado)

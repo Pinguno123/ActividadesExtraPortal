@@ -1,4 +1,4 @@
-﻿namespace ActividadesExtraPortal.Views
+namespace ActividadesExtraPortal.Views
 {
     partial class GruposExtension
     {
@@ -34,6 +34,7 @@
             // 
             // flpExtension
             // 
+            flpExtension.AutoScroll = true;
             flpExtension.Location = new Point(118, 155);
             flpExtension.Name = "flpExtension";
             flpExtension.Size = new Size(948, 594);

@@ -1,4 +1,4 @@
-﻿namespace ActividadesExtraPortal
+namespace ActividadesExtraPortal
 {
     partial class Deportes
     {
@@ -116,6 +116,7 @@
             // 
             // flpDeportesTarjeta
             // 
+            flpDeportesTarjeta.AutoScroll = true;
             flpDeportesTarjeta.Location = new Point(118, 328);
             flpDeportesTarjeta.Name = "flpDeportesTarjeta";
             flpDeportesTarjeta.Size = new Size(948, 406);

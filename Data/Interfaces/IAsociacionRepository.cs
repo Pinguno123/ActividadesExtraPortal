@@ -11,6 +11,7 @@ namespace ActividadesExtraPortal.Data
         string CancelarMembresia(string carnet, int idAsociacion);
         string CancelarMembresiaAsociacion(string carnet, int idAsociacion);
         bool CrearAsociacion(Asociacion aso);
+        bool ActualizarAsociacion(Asociacion aso);
         bool ActualizarEstadoMembresia(string carnet, int idAsociacion, string nuevoEstado);
     }
 }
